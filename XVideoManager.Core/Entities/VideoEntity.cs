@@ -1,13 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.IO;
+using System.Collections.Generic;
+using XVideoManager.Core.Utils;
 
 namespace XVideoManager.Core.Entities
 {
     public class VideoEntity
     {
-        public VideoEntity(string code, string title, string banner)
+        public VideoEntity(string code, string title, string banner, Uri link)
         {
             Code = code
                 ?? throw new ArgumentNullException(nameof(code));
@@ -15,42 +15,89 @@ namespace XVideoManager.Core.Entities
                 ?? throw new ArgumentNullException(nameof(title));
             Banner = banner
                 ?? throw new ArgumentNullException(nameof(banner));
+            Link = link
+                ?? throw new ArgumentNullException(nameof(link));
+        }
+
+        public VideoEntity(
+            string code, string title,
+            string banner, Uri link,
+            bool hasStoraged, string storgaePath)
+        {
+            Code = code
+                ?? throw new ArgumentNullException(nameof(code));
+            Title = title
+                ?? throw new ArgumentNullException(nameof(title));
+            Banner = banner
+                ?? throw new ArgumentNullException(nameof(banner));
+            Link = link
+                ?? throw new ArgumentNullException(nameof(link));
+
+            if (hasStoraged)
+            {
+                StoragePath = storgaePath
+                    ?? throw new ArgumentNullException(nameof(storgaePath));
+                HasStoraged = hasStoraged;
+                fileSize = FileUtil.GetSize(StoragePath);
+            }
         }
 
         /// <summary>
         /// 番号
         /// </summary>
-        [NotNull]
         public string Code { get; set; }
 
-        [NotNull]
+        /// <summary>
+        /// 标题
+        /// </summary>
         public string Title { get; set; }
 
-        [NotNull]
+        /// <summary>
+        /// 片商
+        /// </summary>
         public string Banner { get; set; }
 
-        [AllowNull]
+        /// <summary>
+        /// 简介
+        /// </summary>
         public string? Description { get; set; }
 
-        [AllowNull]
+        /// <summary>
+        /// 出演女优
+        /// </summary>
         public IList<string>? Stars { get; set; }
 
+        /// <summary>
+        /// 是否存储
+        /// </summary>
         public bool HasStoraged { get; set; }
 
+        /// <summary>
+        /// 存储路径
+        /// </summary>
         public string? StoragePath { get; set; }
 
-        public string CoverName
+        /// <summary>
+        /// 封面文件名
+        /// </summary>
+        public string? CoverName
         {
-            get => coverName ?? $"{Code}.jpg";
+            get => HasStoraged ? coverName ?? $"{Code}.jpg" : null;
             set => coverName = value;
         }
 
-        public string VideoName
+        /// <summary>
+        /// 源视频文件名
+        /// </summary>
+        public string? VideoName
         {
-            get => videoName ?? $"{Code}.mp4";
+            get => HasStoraged ? videoName ?? $"{Code}.mp4" : null;
             set => videoName = value;
         }
 
+        /// <summary>
+        /// 文件大小
+        /// </summary>
         public uint? FileSize
         {
             get
@@ -65,8 +112,20 @@ namespace XVideoManager.Core.Entities
             }
         }
 
+        /// <summary>
+        /// 视频片段
+        /// </summary>
+        public IList<string>? Fragments { get; set; }
+
+        /// <summary>
+        /// 网页链接
+        /// </summary>
+        public Uri Link { get; set; }
+
+        #region 字段
         private string? coverName;
         private string? videoName;
         private uint? fileSize;
+        #endregion
     }
 }
