@@ -7,10 +7,26 @@ namespace XVideoManager.Core.Services
 {
     public interface IVideoService
     { 
+        /// <summary>
+        /// 获取视频列表
+        /// </summary>
+        /// <returns></returns>
         public IList<VideoEntity> GetVideoList();
 
+        /// <summary>
+        /// 添加视频
+        /// </summary>
+        /// <param name="videoEntity">视频实体</param>
         public void AddVideo(VideoEntity videoEntity);
 
+        /// <summary>
+        /// 设置视频为已存储
+        /// </summary>
+        /// <param name="video">视频实体</param>
+        /// <param name="path">存储路径</param>
+        /// <param name="fragments">视频片段</param>
+        /// <param name="videoName">视频名称</param>
+        /// <param name="coverName">封面名称</param>
         public void StorageVideo(
             VideoEntity video,
             string path,
