@@ -7,6 +7,8 @@ namespace XVideoManager.Core.Entities
 {
     public class VideoEntity
     {
+        #region 构造函数
+
         public VideoEntity(string code, string title, string banner, Uri link)
         {
             Code = code
@@ -41,6 +43,10 @@ namespace XVideoManager.Core.Entities
                 fileSize = FileUtil.GetSize(StoragePath);
             }
         }
+
+        #endregion
+
+        #region 属性
 
         /// <summary>
         /// 番号
@@ -121,6 +127,8 @@ namespace XVideoManager.Core.Entities
         /// 网页链接
         /// </summary>
         public Uri Link { get; set; }
+
+        #endregion
 
         #region 字段
         private string? coverName;
