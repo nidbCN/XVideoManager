@@ -4,9 +4,9 @@ using XVideoManager.Core.Entities;
 
 namespace XVideoManager.Core.Contexts
 {
-    class FileDbContext : DbContext
+    public class FileDbContext : DbContext
     {
-        public DbSet<VideoEntity>? Videos { get; set; }
+        public DbSet<VideoEntity> Videos { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
