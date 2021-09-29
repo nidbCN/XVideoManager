@@ -10,4 +10,8 @@
     <PackageReference Include="FileContextCore" Version="3.4.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\XVideoManager.Common\XVideoManager.Common.csproj" />
+  </ItemGroup>
+
 </Project>

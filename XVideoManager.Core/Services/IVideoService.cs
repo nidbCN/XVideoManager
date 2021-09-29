@@ -80,7 +80,14 @@ namespace XVideoManager.Core.Services
         /// <summary>
         /// 删除所有视频
         /// </summary>
-        public bool DeleteVideos();
+        public bool DeleteAllVideos();
+
+        /// <summary>
+        /// 删除指定视频
+        /// </summary>
+        /// <param name="match">委托</param>
+        /// <returns></returns>
+        public bool DeleteVideo(Predicate<VideoEntity> match);
 
         /// <summary>
         /// 删除指定视频

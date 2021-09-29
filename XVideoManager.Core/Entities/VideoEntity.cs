@@ -15,7 +15,7 @@ namespace XVideoManager.Core.Entities
                 ?? throw new ArgumentNullException(nameof(code));
             Title = title
                 ?? throw new ArgumentNullException(nameof(title));
-            Banner = banner
+            BrandName = banner
                 ?? throw new ArgumentNullException(nameof(banner));
             Link = link
                 ?? throw new ArgumentNullException(nameof(link));
@@ -30,7 +30,7 @@ namespace XVideoManager.Core.Entities
                 ?? throw new ArgumentNullException(nameof(code));
             Title = title
                 ?? throw new ArgumentNullException(nameof(title));
-            Banner = banner
+            BrandName = banner
                 ?? throw new ArgumentNullException(nameof(banner));
             Link = link
                 ?? throw new ArgumentNullException(nameof(link));
@@ -61,7 +61,7 @@ namespace XVideoManager.Core.Entities
         /// <summary>
         /// 片商
         /// </summary>
-        public string Banner { get; set; }
+        public string BrandName { get; set; }
 
         /// <summary>
         /// 简介

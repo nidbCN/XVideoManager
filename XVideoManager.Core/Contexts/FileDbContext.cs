@@ -22,7 +22,7 @@ namespace XVideoManager.Core.Contexts
 
             videoEntity.Property(x => x.Code).IsRequired();
             videoEntity.Property(x => x.Title).IsRequired();
-            videoEntity.Property(x => x.Banner).IsRequired();
+            videoEntity.Property(x => x.BrandName).IsRequired();
             videoEntity.Property(x => x.Link).IsRequired();
 
             videoEntity.HasIndex(x => x.Code);

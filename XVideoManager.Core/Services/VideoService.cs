@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using XVideoManager.Common.Extensions;
 using XVideoManager.Core.Contexts;
 using XVideoManager.Core.Entities;
 
@@ -38,33 +39,24 @@ namespace XVideoManager.Core.Services
         }
 
         public bool DeleteVideoByCode(string code)
+            => DeleteAllVideos(x => x.Code == code);
+
+        public bool DeleteAllVideos()
+            => _context.Videos.RemoveAll(x => true);
+
+        public bool DeleteAllVideos(Predicate<VideoEntity> match)
         {
+            if (match is null) 
+                throw new ArgumentNullException(nameof(match));
 
-
-            throw new NotImplementedException();
-        }
-
-        public bool DeleteVideos()
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool DeleteVideos(Predicate<VideoEntity> match)
-        {
-            var video = _context.Videos.Where(x => match(x));
-
-            return !(_context.Videos.Remove(video) is null);
+            return _context.Videos.RemoveAll(match);
         }
 
         public bool DeleteVideosByBrand(string brandName)
-        {
-            throw new NotImplementedException();
-        }
+            => _context.Videos.RemoveAll(x => x.BrandName == brandName);
 
         public bool DeleteVideosByStar(string starName)
-        {
-            throw new NotImplementedException();
-        }
+            => _context.Videos.RemoveAll(x=> !(x.Stars?.Contains(starName) is null));
 
         public bool DeleteVideosByTags(params string[] tags)
         {
@@ -107,6 +99,16 @@ namespace XVideoManager.Core.Services
         }
 
         public void UpdateVideo(VideoEntity video, VideoEntity newVideo)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool DeleteVideo(Predicate<VideoEntity> match)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool DeleteVideos(Func<VideoEntity, bool> match)
         {
             throw new NotImplementedException();
         }
