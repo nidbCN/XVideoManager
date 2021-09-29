@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using XVideoManager.Core.Contexts;
 using XVideoManager.Core.Entities;
@@ -47,9 +49,9 @@ namespace XVideoManager.Core.Services
             throw new NotImplementedException();
         }
 
-        public bool DeleteVideos(Func<VideoEntity, bool> match)
+        public bool DeleteVideos(Predicate<VideoEntity> match)
         {
-            var video = _context.Videos.Find(match);
+            var video = _context.Videos.Where(x => match(x));
 
             return !(_context.Videos.Remove(video) is null);
         }
