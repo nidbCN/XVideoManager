@@ -22,5 +22,17 @@ namespace XVideoManager.Common.Extensions
 
             return true;
         }
+
+        public static bool RemoveAll<T>(this DbSet<T> set) where T : class
+        {
+            if (set is null)
+                throw new ArgumentNullException(nameof(set));
+
+            var collection = set.ToList();
+
+            collection.Clear();
+
+            return true;
+        }
     }
 }

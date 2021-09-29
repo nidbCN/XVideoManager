@@ -56,12 +56,10 @@ namespace XVideoManager.Core.Services
             => _context.Videos.RemoveAll(x => x.BrandName == brandName);
 
         public bool DeleteVideosByStar(string starName)
-            => _context.Videos.RemoveAll(x=> !(x.Stars?.Contains(starName) is null));
+            => _context.Videos.RemoveAll(x => x.Stars?.Contains(starName) ?? false);
 
         public bool DeleteVideosByTags(params string[] tags)
-        {
-            throw new NotImplementedException();
-        }
+            => _context.Videos.RemoveAll(x => false);
 
         public VideoEntity GetVideoByCode(string code)
         {
