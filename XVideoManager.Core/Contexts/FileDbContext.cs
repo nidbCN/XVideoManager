@@ -6,7 +6,10 @@ namespace XVideoManager.Core.Contexts
 {
     public class FileDbContext : DbContext
     {
+
+#nullable disable
         public DbSet<VideoEntity> Videos { get; set; }
+#nullable restore
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
